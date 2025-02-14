@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Formats</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Available Video Formats</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Resolution</th>
+                    <th scope="col">Audio Codec</th>
+                    <th scope="col">Video Codec</th>
+                    <th scope="col">File Size</th>
+                    <th scope="col">Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for format in formats %}
+                    <tr>
+                        <td>{{ format['resolution'] }}</td>
+                        <td>{{ format['audio_codec'] }}</td>
+                        <td>{{ format['video_codec'] }}</td>
+                        <td>
+                            {% if format['filesize'] %}
+                                {{ format['filesize'] | filesizeformat }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if format['url'] %}
+                                <a href="{{ format['url'] }}" class="btn btn-primary btn-sm" target="_blank">Download</a>
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
